@@ -15,7 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'username',
     ];
 
     /**
@@ -31,4 +34,44 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function follows()
+    {
+        return $this->hasMany(Follow::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likeActivities()
+    {
+        return $this->hasMany(LikeActivity::class);
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }   
 }
