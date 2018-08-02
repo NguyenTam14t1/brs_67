@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        factory(App\Models\User::class, 1)->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => '123456',

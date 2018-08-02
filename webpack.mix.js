@@ -10,6 +10,7 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/js/app.js', 'public/js');
+mix.js('resources/assets/auth/js/main.js', 'public/auth/js/main.js');
+mix.sass('resources/assets/sass/app.scss', 'public/css');
+mix.copyDirectory('resources/assets/books', 'public/books');

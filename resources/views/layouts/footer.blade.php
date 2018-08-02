@@ -22,8 +22,8 @@
             <div class="col-lg-3 col-md-6 single-footer-widget">
                 <div class="footer-single-widget">
                     <h4>{{ trans('lang.subscribe') }}</h4>
-                    {{ Form::open(['method' => 'POST', 'route' => '']) }}
-                        {{ Form::email('email', null, ['id' => 'eemail', 'placeholder' => trans('plh_email')]) }}
+                    {{ Form::open(['method' => 'POST']) }}
+                        {{ Form::email('email', null, ['id' => 'eemail', 'class' => 'form-control search-box', 'placeholder' => trans('lang.plh_email')]) }}
                         {{ Form::button('<i class="fa fa-arrow-right"></i>') }}
                     {{ Form::close() }}
                 </div>

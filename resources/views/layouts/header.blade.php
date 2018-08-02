@@ -3,12 +3,12 @@
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-4 col-md-4 col-sm-12 logo-left no-padding">
-                    <a href="#">
-                        {{ HTML::image('books/img/logo.png', ['class' => 'img-fluid']) }}
+                    <a href="index.html">
+                        <img class="img-fluid" src="{{ asset('/books/img/logo.png') }}" alt="">
                     </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 logo-right no-padding ads-banner">
-                    {{ HTML::image('books/img/banner-ad.jpg', ['class' => 'img-fluid']) }}
+                    <img class="img-fluid" src="{{ asset('/books/img/banner-ad.jpg') }}" alt="">
                 </div>
             </div>
         </div>
@@ -29,13 +29,8 @@
             </ul>
             </nav><!-- #nav-menu-container -->
             <div class="navbar-right">
-                {{ Form::open(['method' => 'POST', 'route' => '', 'class' => 'search']) }}
+                {{ Form::open(['method' => 'POST', 'class' => 'search']) }}
                     {{ Form::text('search_box', null, ['id' => 'search-box', 'class' => 'form-control search-box', 'placeholder' => trans('search')]) }}
-                    {{ Form::label('search_box', ['class' => 'search-box-label']) }}
-                    <span class="lnr lnr-magnifier"></span>
-                    <span class="search-close">
-                        <span class="lnr lnr-cross"></span>
-                    </span>
                 {{ Form::close() }}
             </div>
         </div>
