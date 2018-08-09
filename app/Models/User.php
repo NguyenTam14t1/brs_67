@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\VerificationToken;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username',
+        'email_verified',
     ];
 
     /**
@@ -74,5 +75,20 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
-    }   
+    }
+
+    public function verificationToken()
+    {
+        return $this->hasOne(VerificationToken::class);
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return $this->email_verified;
+    }
+
+    public static function getUserByEmail($email)
+    {
+        return static::where('email', $email);
+    }
 }

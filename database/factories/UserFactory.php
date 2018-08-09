@@ -107,8 +107,8 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => $faker->password,
+        'password' => '654321',
         'remember_token' => str_random(10),
-        'username' => $faker->userName,
+        'verified' => $faker->boolean,
     ];
 });
