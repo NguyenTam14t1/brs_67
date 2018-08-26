@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ShowRate;
 
 class Review extends Model
 {
+    use ShowRate;
+    
     protected $fillable = [
         'user_id',
         'book_id',

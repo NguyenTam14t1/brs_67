@@ -51,7 +51,7 @@ class ResetPasswordController extends Controller
         if(!$this->guard()->user()->hasVerifiedEmail()) {
             $this->guard()->logout();
 
-            return redirect()->route('login')->withInfo(trans('register.msg.reset_password_success'));
+            return redirect()->route('login')->withInfo(trans('passwords.reset_password_success'));
         }
         
         return redirect($this->redirectPath())

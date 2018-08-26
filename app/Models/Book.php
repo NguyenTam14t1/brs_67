@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ShowRate;
 
 class Book extends Model
 {
+    use ShowRate;
+
     protected $fillable = [
         'title',
         'introduction',
@@ -36,5 +39,15 @@ class Book extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function getPartOfIntroductionAttribute()
+    {
+        return str_limit($this->introduction, $limit = config('setting.show_introduce'));
+    }
+
+    public function getPictureAttribute($value)
+    {
+        return config('setting.path_img') . $value;
     }
 }

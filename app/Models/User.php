@@ -6,6 +6,7 @@ use App\Models\VerificationToken;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -20,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'email_verified',
+        'verified',
     ];
 
     /**
@@ -84,7 +85,7 @@ class User extends Authenticatable
 
     public function hasVerifiedEmail()
     {
-        return $this->email_verified;
+        return $this->verified;
     }
 
     public static function getUserByEmail($email)
