@@ -21,8 +21,8 @@ Route::get('/verify/resend', 'Auth\VerificationController@resend')->name('auth.v
 Route::namespace('Member')->group(function() {
     Route::resource('book', 'BooksController');
     Route::resource('category', 'CategoryController');
-    Route::get('/contact', 'ContactController@index')->name('contact.index');
+    Route::get('/request-book', 'RequestBookController@index')->name('requestBook.index');
 });
 
 Route::post('/review', 'AjaxController@postReview')->name('post.review');
-Route::get('/request', 'AjaxController@getRequest')->name('get.request');
+Route::post('/get-request', 'AjaxController@getRequest')->name('get.request');
