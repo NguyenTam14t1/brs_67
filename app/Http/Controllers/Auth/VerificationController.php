@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Events\UserRequestedVerificationEmail;
+use Exception;
 
 class VerificationController extends Controller
 {
@@ -23,14 +24,19 @@ class VerificationController extends Controller
 
     public function resend(Request $request)
     {
-        $user = User::byEmail($request->email)->firstOrFail();
+        try {
+            $user = User::getUserByEmail($request->email)->firstOrFail();
 
-        if($user->hasVerifiedEmail()) {
-            return redirect()->route('home')->withInfo(trans('register.msg.email_verified'));
+            if($user->hasVerifiedEmail()) {
+                return redirect()->route('home')->withInfo(trans('register.msg.email_verified'));
+            }
+
+            event(new UserRequestedVerificationEmail($user));
+
+            return redirect()->route('login')->withInfo(trans('register.msg.resend_verify'));
+        } catch (Exception $e) {
+
+            return redirect()->route('register')->withError(trans('login.msg.email_not_exist'));
         }
-
-        event(new UserRequestedVerificationEmail($user));
-
-        return redirect()->route('login')->withInfo(trans('register.msg.resend_verify'));
     }
 }

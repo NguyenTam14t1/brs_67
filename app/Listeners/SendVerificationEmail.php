@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use Mail;
-use App\Models\User;
-use App\Models\VerificationToken;
 use App\Mail\SendVerificationToken;
 
 use Illuminate\Queue\InteractsWithQueue;

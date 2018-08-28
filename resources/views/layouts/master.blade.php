@@ -13,11 +13,10 @@
         <meta charset="UTF-8">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Site Title -->
-        <title>{{ trans('lang.title') }}</title>
-
+        <title>@yield('title', trans('lang.title'))</title>
+        @routes()   
         <!-- CSS ============================================= -->       
         @section('css')
-            {{ Html::style('books/css/main.css') }}
             {{ Html::style('books/css/linearicons.css') }}
             {{ Html::style('books/css/font-awesome.min.css') }}
             {{ Html::style('books/css/bootstrap.css') }}
@@ -26,7 +25,8 @@
             {{ Html::style('books/css/animate.min.css') }}
             {{ Html::style('books/css/owl.carousel.css') }}
             {{ Html::style('books/css/jquery-ui.css') }}
-            {{ Html::style('//fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700') }}
+            {{ Html::style('books/css/rating.css') }}
+            {{ Html::style('books/css/main.css') }}
         @show
     </head>
     <body>
@@ -44,9 +44,7 @@
         
         @section('js')
             {{ Html::script('books/js/vendor/jquery-2.2.4.min.js') }}
-            {{ Html::script('books/https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous') }}
             {{ Html::script('books/js/vendor/bootstrap.min.js') }}
-            {{ Html::script('books/https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA') }}
             {{ Html::script('books/js/easing.min.js') }}
             {{ Html::script('books/js/hoverIntent.js') }}
             {{ Html::script('books/js/superfish.min.js') }}
@@ -58,6 +56,8 @@
             {{ Html::script('books/js/owl.carousel.min.js') }}
             {{ Html::script('books/js/mail-script.js') }}
             {{ Html::script('books/js/main.js') }}
+            {{ Html::script('books/js/BookAjax.js') }}
+            {{ Html::script(asset('auth/js/logout.js')) }}
         @show
     </body>
 </html>

@@ -1,64 +1,71 @@
 <div class="col-lg-4">
     <div class="sidebars-area">
+         <div class="single-sidebar-widget editors-pick-widget">
+            <div class="single-sidebar">
+                <h6 class="title">@lang('lang.search')</h6>
+                {{ Form::open(['method' => 'get', 'route' => 'search.book']) }}
+                    {{ Form::text('search_box', null, ['class' => 'form-control', 'placeholder' => trans('lang.plh_request')]) }}
+                    {{ Form::select('category_id', $allCategories, null, [
+                        'id' => 'category_id', 
+                        'class' => 'form-control select-search', 
+                        'placeholder' => trans('lang.plh_select_category')
+                    ]) }}
+
+                    {{ Form::select('rating_id', [
+                            config('setting.level_rate.medium') => trans('lang.level_rate.medium'), 
+                            config('setting.level_rate.good') => trans('lang.level_rate.good'), 
+                            config('setting.level_rate.awesome') => trans('lang.level_rate.awesome')
+                        ], 
+                        null, 
+                        ['id' => 'rating_id', 'class' => 'form-control select-search', 'placeholder' => trans('lang.plh_select_rating')]) 
+                    }}
+
+                    {{ Form::submit(trans('lang.search'), ['class' => 'btn btn-primary select-search']) }}
+                    
+                {{ Form::close() }}
+            </div>
+        </div>
+
         <div class="single-sidebar-widget editors-pick-widget">
-            <h6 class="title">{{ trans('lang.top_books') }}</h6>
+            <h6 class="title">@lang('lang.top_rating_books')</h6>
             <div class="editors-pick-post">
-                <div class="feature-img-wrap relative">
-                    <div class="feature-img relative">
-                        <div class="overlay overlay-bg"></div>
-                        {{ HTML::image('books/img/e1.jpg', ['class' => 'img-fluid']) }}
-                    </div>
-                    <ul class="tags">
-                        <li><a href="#">{{ trans('lang.parent_category') }}</a></li>
-                    </ul>
-                </div>
-                <div class="details">
-                    <a href="image-post.html">
-                        <h4 class="mt-20">A Discount Toner Cartridge Is
-                        Better Than Ever.</h4>
-                    </a>
-                    <ul class="meta">
-                        <li><a href="#"><span class="lnr lnr-user"></span>Mark wiens</a></li>
-                        <li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-                        <li><a href="#"><span class="lnr lnr-bubble"></span>06 </a></li>
-                    </ul>
-                    <p class="excert">
-                        Lorem ipsum dolor sit amet, consecteturadip isicing elit, sed do eiusmod tempor incididunt ed do eius.
-                    </p>
-                </div>
                 <div class="post-lists">
-                    <div class="single-post d-flex flex-row">
-                        <div class="thumb">
-                            {{ HTML::image('books/img/e2.jpg', ['class' => 'img-fluid']) }}]
+                    @foreach ($topRatingBooks as $topRatingBook)
+                        <div class="single-post d-flex flex-row">
+                            <div class="thumb">
+                                <img class="img-fluid list-books" src="{{ $topRatingBook->picture }}" alt="">
+                            </div>
+                            <div class="detail">
+                                <a href="{{ route('book.show', $topRatingBook->id) }}">
+                                    <h6>{{ $topRatingBook->title }}</h6>
+                                </a>
+                                <p>{{ $topRatingBook->part_of_introduction }}</p>
+                                @include('layouts.introduce_book', ['book' => $topRatingBook])
+                            </div>
                         </div>
-                        <div class="detail">
-                            <a href="image-post.html"><h6>Help Finding Information
-                            Online is so easy</h6></a>
-                            <ul class="meta">
-                                <li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-                                <li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
         
         <div class="single-sidebar-widget most-popular-widget">
-            <h6 class="title">{{ trans('lang.most_popular') }}</h6>
-            <div class="single-list flex-row d-flex">
-                <div class="thumb">
-                    {{ HTML::image('books/img/m1.jpg', ['class' => 'img-fluid']) }}
-                </div>
-                <div class="details">
-                    <a href="image-post.html">
-                        <h6>Help Finding Information
-                        Online is so easy</h6>
-                    </a>
-                    <ul class="meta">
-                        <li><a href="#"><span class="lnr lnr-calendar-full"></span>03 April, 2018</a></li>
-                        <li><a href="#"><span class="lnr lnr-bubble"></span>06</a></li>
-                    </ul>
+            <h6 class="title">@lang('lang.most_popular')</h6>
+            <div class="editors-pick-post">
+                <div class="post-lists">
+                    @foreach ($topCounterViewBooks as $topViewBook)
+                        <div class="single-post d-flex flex-row">
+                            <div class="thumb">
+                                <img class="img-fluid list-books" src="{{ $topViewBook->picture }}" alt="">
+                            </div>
+                            <div class="detail">
+                                <a href="{{ route('book.show', $topViewBook->id) }}">
+                                    <h6>{{ $topViewBook->title }}</h6>
+                                </a>
+                                <p>{{ $topViewBook->part_of_introduction }}</p>
+                                @include('layouts.introduce_book', ['book' => $topViewBook])
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
