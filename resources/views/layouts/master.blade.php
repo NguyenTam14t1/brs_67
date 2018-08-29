@@ -43,6 +43,7 @@
         <!-- js -->
         
         @section('js')
+            {{ Html::script('js/app.js') }}
             {{ Html::script('books/js/vendor/jquery-2.2.4.min.js') }}
             {{ Html::script('books/js/vendor/bootstrap.min.js') }}
             {{ Html::script('books/js/easing.min.js') }}

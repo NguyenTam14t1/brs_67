@@ -20,7 +20,6 @@ class Book extends Model
         'average_rating',
         'counter_view',
     ];
-
     public function categories()
     {
         return $this->belongsToMany(Category::class);
@@ -50,4 +49,14 @@ class Book extends Model
     {
         return config('setting.path_img') . $value;
     }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($book) { 
+        // before delete() method call this
+            $book->reviews()->delete();
+            // do the rest of the cleanup...
+        });
+    }   
 }

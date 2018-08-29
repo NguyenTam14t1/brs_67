@@ -7,7 +7,6 @@
                     @foreach ($categories as $category)
                         <li><a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a></li>
                     @endforeach
-                <li><a href="{{ route('request-book.index') }}">@lang('lang.request')</a></li>
                 <li><a href="#">@lang('lang.contact')</a></li>
                 <!-- Authentication Links -->
                 @guest
@@ -18,6 +17,7 @@
                         <a class="nav-link" href="{{ route('register') }}">@lang('register.title_register')</a>
                     </li>
                 @else
+                    <li><a href="{{ route('request-book.index') }}">@lang('lang.request')</a></li>
                     <li class="menu-has-children">
                         <a href="#">
                             {{ Auth::user()->name }} <span class="caret"></span>

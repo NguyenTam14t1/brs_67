@@ -16,8 +16,18 @@ class Category extends Model
         return $this->belongsToMany(Book::class);
     }
 
-    public function request()
+    public function requests()
     {
-        return $this->belongsTo(Request::class);
+        return $this->hasMany(RequestBook::class);
+    }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($category) { 
+        // before delete() method call this
+            $category->requests()->delete();
+            // do the rest of the cleanup...
+        });
     }
 }
