@@ -1,0 +1,1 @@
+<img onclick="return changeStatus({$id}, {$status})" src="{{ config('setting.path_img_deactive') }}">
